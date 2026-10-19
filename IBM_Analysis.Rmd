@@ -1,0 +1,166 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+
+hrdata <- read.csv("HR-Employee-Attrition.csv")
+
+```
+
+
+```{r}
+
+# Create a list of numeric columns
+
+num_cols <- c("Age", "TotalWorkingYears")
+
+```
+
+```{r}
+
+hrdata_num <- hrdata[, num_cols]
+
+```
+
+
+```{r}
+
+cor(hrdata_num)
+
+```
+
+
+```{r}
+
+pairs(~ MonthlyIncome + Age + TotalWorkingYears, data = hrdata, main = "Scatterplot Matrix")
+
+```
+
+
+
+```{r}
+
+hrdata$EducationLabel <- factor(
+  hrdata$Education,
+  levels = 1:5,
+  labels = c(
+    "Below College",
+    "College",
+    "Bachelor",
+    "Master",
+    "Doctor"
+  ),
+  ordered = TRUE
+)
+
+
+table(hrdata$EducationLabel, useNA = "ifany")
+
+
+```
+
+
+
+```{r}
+
+boxplot(
+  Age ~ EducationLabel,
+  data = hrdata,
+  main = "Age by Education Level",
+  xlab = "Education",
+  ylab = "Age",
+  outline = TRUE,
+  pch = 1
+)
+
+```
+
+```{r}
+
+boxplot(
+  TotalWorkingYears ~ EducationLabel,
+  data = hrdata,
+  main = "Total Working Years by Education Level",
+  xlab = "Education",
+  ylab = "Total Working Years",
+  outline = TRUE,
+  pch = 1
+)
+
+```
+
+
+
+```{r}
+
+boxplot(
+  MonthlyIncome ~ EducationLabel,
+  data = hrdata,
+  main = "Monthly Income by Education Level",
+  xlab = "Education",
+  ylab = "Monthly Income",
+  outline = TRUE,
+  pch = 1
+)
+
+```
+
+```{r}
+
+boxplot(Age ~ Attrition,
+    data = hrdata,
+    main = "Age Distribution by Attrition",
+    xlab = "Attrition Status", ylab = "Age")
+
+```
+
+
+```{r}
+
+yes_age <- hrdata[(hrdata$Attrition == "Yes"), 'Age']
+no_age <- hrdata[(hrdata$Attrition != "Yes"), 'Age']
+
+```
+
+
+```{r}
+
+t.test(yes_age, no_age)
+
+```
+
+
+
+```{r}
+
+yes_empno <- hrdata[(hrdata$Attrition == "Yes"), 'EmployeeNumber']
+no_empno <- hrdata[(hrdata$Attrition != "Yes"), 'EmployeeNumber']
+
+t.test(yes_empno, no_empno)
+
+```
+```{r}
+
+model1 = lm(MonthlyIncome ~ Age, data = hrdata)
+summary(model1)
+
+```
+
+
+```{r}
+
+# Create a model with two inputs
+model2 <- lm(MonthlyIncome ~ Age + TotalWorkingYears, data = hrdata)
+
+# See the results
+summary(model2)
+
+```
+
+
+
+
+
+
+
