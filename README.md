@@ -85,3 +85,13 @@ The workflow includes robust feature engineering and structured visualization sc
 
 
 * **Comparative Boxplots:** Analyzed distributions of `Age`, `TotalWorkingYears`, and `MonthlyIncome` across education tiers and attrition statuses to inspect organizational tiering and variance.
+
+
+## 📂 Repository Structure
+
+```text
+📦 IBM_HR_analytics_project_using_R
+ ┣ 📜 HR-Employee-Attrition.csv       # Main dataset containing employee records and metrics
+ ┣ 📜 HR_Data_Dictionary.pdf          # Documentation explaining the employee attrition dataset columns
+ ┣ 📜 IBM_Analysis.Rmd                # R Markdown notebook containing code, analysis, and narrative
+ ┗ 📜 README.md                       # Project overview and documentation
